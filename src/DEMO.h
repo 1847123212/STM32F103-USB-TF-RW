@@ -19,8 +19,8 @@
 #include "stm32f10x.h"
 
 
-#define Led_ON()   GPIO_SetBits(GPIOB, GPIO_Pin_5);  	      //LED1ÁÁ
-#define Led_OFF()  GPIO_ResetBits(GPIOB, GPIO_Pin_5); 	      //LED2Ãð
+#define Led_ON()   GPIO_SetBits(GPIOA, GPIO_Pin_1);  	      //LED1ÁÁ
+#define Led_OFF()  GPIO_ResetBits(GPIOA, GPIO_Pin_1); 	      //LED2Ãð
 
 EXT uint32_t Mass_Memory_Size[2];
 EXT uint32_t Mass_Block_Size[2];

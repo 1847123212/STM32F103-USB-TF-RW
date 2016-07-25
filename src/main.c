@@ -41,10 +41,10 @@ void GPIO_Configuration(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
 	
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;				     //状态LED1
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;				     //状态LED1
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;			 //通用推挽输出模式
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;			 //输出模式最大速度50MHz
-  GPIO_Init(GPIOB, &GPIO_InitStructure); 				  
+  GPIO_Init(GPIOA, &GPIO_InitStructure); 				  
 }
 /****************************************************************************
 * 名    称：void NVIC_Configuration(void)
@@ -81,27 +81,17 @@ void NVIC_Configuration(void)
   NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_Init(&NVIC_InitStructure);
 }
-/****************************************************************************
-* 名    称：int main(void)
-* 功    能：主函数
-* 入口参数：无
-* 出口参数：无
-* 说    明：
-* 调用方法：无 
-****************************************************************************/
-int main(void)
-{
-  RCC_Configuration(); 		//设置系统时钟 
-  Usart1_Init();			//串口初始化
-  USB_Disconnect_Config();	//设置USB连接控制线    
-  MAL_Init(0);  	        //存储介质初始化  
-  GPIO_Configuration();     //状态LED的初始化   
-  NVIC_Configuration();     //USB通信中断配置
-  USB_Init();				//USB初始化
-  while (bDeviceState != CONFIGURED);	 //等待USB连入HOST
-  Led_ON();								 //LED1 亮
-  while (1);
+
+
+void delay1 (){
+ int i =0;
+	for(i=0;i<100000;i++){
+	;
+	}
 }
+
+
+
 
 /****************************************************************************
 * 名    称：void Usart1_Init(void)
@@ -269,3 +259,26 @@ void USART_OUT(USART_TypeDef* USARTx, uint8_t *Data,...){
 		while(USART_GetFlagStatus(USARTx, USART_FLAG_TC)==RESET);
 	}
 }
+
+/****************************************************************************
+* 名    称：int main(void)
+* 功    能：主函数
+* 入口参数：无
+* 出口参数：无
+* 说    明：
+* 调用方法：无 
+****************************************************************************/
+int main(void)
+{
+  RCC_Configuration(); 		//设置系统时钟 
+  Usart1_Init();			//串口初始化
+  USB_Disconnect_Config();	//设置USB连接控制线    
+  MAL_Init(0);  	        //存储介质初始化  
+  GPIO_Configuration();     //状态LED的初始化   
+  NVIC_Configuration();     //USB通信中断配置
+  USB_Init();				//USB初始化
+  while (bDeviceState != CONFIGURED);	 //等待USB连入HOST
+  Led_ON();								 //LED1 亮
+  while (1);
+}
+

@@ -41,7 +41,6 @@ uint16_t MAL_Init(uint8_t lun)
   switch (lun)
   {
     case 0:
-
       Status = SD_Init();
       Status = SD_GetCardInfo(&SDCardInfo);
       Status = SD_SelectDeselect((uint32_t) (SDCardInfo.RCA << 16));
